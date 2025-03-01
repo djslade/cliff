@@ -1,15 +1,24 @@
 package main
 
 import (
+	"net/http"
 	"path/filepath"
 	"text/template"
+	"time"
 
 	"github.com/djslade/cliff/internal/models"
 )
 
 type templateData struct {
-	Snippet  models.Snippet
-	Snippets []models.Snippet
+	Snippet     models.Snippet
+	Snippets    []models.Snippet
+	CurrentYear int
+}
+
+func (app *application) newTemplateData(r *http.Request) templateData {
+	return templateData{
+		CurrentYear: time.Now().Year(),
+	}
 }
 
 func newTemplateCache() (map[string]*template.Template, error) {
