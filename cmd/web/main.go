@@ -8,6 +8,7 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/subosito/gotenv"
 )
 
 type application struct {
@@ -15,8 +16,10 @@ type application struct {
 }
 
 func main() {
+	gotenv.Load(".env")
+
 	addr := flag.String("addr", ":4000", "HTTP network address")
-	dsm := flag.String("dsm", "web:twine15@/cliff?parseTime=true", "MySQL data source name")
+	dsm := flag.String("dsm", os.Getenv("MYSQL_DSM"), "MySQL data source name")
 	flag.Parse()
 
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
