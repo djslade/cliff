@@ -6,9 +6,13 @@ import (
 	"net/http"
 )
 
-func commonHeaders(next http.Handler) http.Handler {
+// Doesn't have to be defined on app but this is for uniformity
+func (app *application) commonHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Security-Policy", "default-src 'self'; style-src 'self' fonts.googleapies.com; font-src fonts.gstatic.com")
+		w.Header().Set(
+			"Content-Security-Policy",
+			"default-src 'self'; style-src 'self' fonts.googleapies.com; font-src fonts.gstatic.com",
+		)
 		w.Header().Set("Referrer-Policy", "origin-when-cross-origin")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.Header().Set("X-Frame-Options", "deny")

@@ -2,7 +2,10 @@ module github.com/djslade/cliff
 
 go 1.23.1
 
-require github.com/go-sql-driver/mysql v1.9.0
+require (
+	github.com/go-sql-driver/mysql v1.9.0
+	github.com/justinas/alice v1.2.0
+)
 
 require golang.org/x/text v0.12.0 // indirect
 
