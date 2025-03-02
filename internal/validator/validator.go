@@ -10,6 +10,11 @@ type Validator struct {
 	FieldErrors map[string]string
 }
 
+var (
+	InvalidBlankField = "This field cannot be blank"
+	InvalidNotInteger = "This field must be a valid integer"
+)
+
 func (v *Validator) Valid() bool {
 	return len(v.FieldErrors) == 0
 }

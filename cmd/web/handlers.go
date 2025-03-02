@@ -74,14 +74,14 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 
 	form.FieldErrors = make(map[string]string)
 
-	form.CheckField(validator.NotBlank(form.Title), "title", "This field cannot be blank")
+	form.CheckField(validator.NotBlank(form.Title), "title", validator.InvalidBlankField)
 	form.CheckField(validator.MaxChars(form.Title, 100), "title", "This field cannot be more than 100 characters long")
 
-	form.CheckField(validator.NotBlank(form.Content), "content", "This field cannot be blank")
+	form.CheckField(validator.NotBlank(form.Content), "content", validator.InvalidBlankField)
 
 	// First convert to int. Conversion can throw an error, so check for that first
 	expires, err := strconv.Atoi(r.PostForm.Get("expires"))
-	form.CheckField(err != nil, "expires", "This field must be a valid integer")
+	form.CheckField(err != nil, "expires", validator.InvalidNotInteger)
 	// Now safe to assign expires to form and proceed if normal
 	// This is safe as, if error is not nil, expires will be 0.
 	form.Expires = expires
