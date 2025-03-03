@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -70,8 +69,6 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	data.Form = snippetCreateForm{}
-
-	app.logger.Info("authenticated user status", slog.Bool("isAuthenticated", data.IsAuthenticated))
 
 	app.render(w, r, http.StatusOK, "create.tmpl.html", data)
 }
