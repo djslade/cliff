@@ -16,9 +16,6 @@ func TestCommonHeaders(t *testing.T) {
 		logger: slog.New(slog.NewTextHandler(io.Discard, nil)),
 	}
 
-	ts := httptest.NewTLSServer(app.routes())
-	defer ts.Close()
-
 	rr := httptest.NewRecorder()
 
 	r, err := http.NewRequest(http.MethodGet, "/", nil)
